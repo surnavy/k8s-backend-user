@@ -1,7 +1,9 @@
+#!/usr/bin/env groovy
 def APP_NAME
 def APP_VERSION
 def DOCKER_IMAGE_NAME
 def PROD_BUILD = false
+def TAG_BUILD = false
 
 pipeline {
     agent {
@@ -71,6 +73,17 @@ pipeline {
                     sh "echo IMAGE_NAME is ${APP_NAME}"
                     sh "echo IMAGE_VERSION is ${APP_VERSION}"
                     sh "echo DOCKER_IMAGE_NAME is ${DOCKER_IMAGE_NAME}"
+
+                    sh "echo TAG is ${params.TAG}"
+                    if( params.TAG.startsWith('origin') == false && params.TAG.endsWith('/main') == false ) {
+                        if( params.RELEASE == true ) {
+                            DOCKER_IMAGE_NAME += '-RELEASE'
+                            PROD_BUILD = true
+                        } else {
+                            DOCKER_IMAGE_NAME += '-TAG'
+                            TAG_BUILD = true
+                        }
+                    }
                 }
             }
         }
@@ -82,6 +95,9 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            when {
+                expression { PROD_BUILD == true || TAG_BUILD == true }
+            }
             steps {
                 script {
                     docker.build "${DOCKER_IMAGE_NAME}"
@@ -90,6 +106,9 @@ pipeline {
         }
 
         stage('Push Docker Image') {
+            when {
+                expression { PROD_BUILD == true || TAG_BUILD == true }
+            }
             steps {
                 script {
                     docker.withRegistry("", DOCKERHUB_CREDENTIAL) {
