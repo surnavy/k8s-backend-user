@@ -3,6 +3,7 @@ package com.welab.k8s_backend_user;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableFeignClients
 @SpringBootApplication
 public class K8sBackendUserApplication {
 
