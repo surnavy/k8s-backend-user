@@ -17,3 +17,7 @@ spring:
       generate-ddl: true
     show-sql: true
     open-in-view: false
+
+    kafka:
+      bootstrap-servers: 192.168.0.75:9092
+    # bootstrap-servers: k8s-external-user-mysql-service:9092
