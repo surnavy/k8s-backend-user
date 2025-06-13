@@ -28,4 +28,4 @@ spec:
             name: backend-user-config
             items:
               - key: application-dev.yml
-                path: application-cdv.yml
+                path: application-dev.yml
