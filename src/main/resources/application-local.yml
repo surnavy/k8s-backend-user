@@ -13,11 +13,17 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create                # 테스트 환경에서만 사용
+      ddl-auto: create
       generate-ddl: true
     show-sql: true
     open-in-view: false
 
-    kafka:
-      bootstrap-servers: 192.168.0.75:9092
+  kafka:
+    bootstrap-servers: 192.168.0.75:9092
     # bootstrap-servers: k8s-external-user-mysql-service:9092
+
+jwt:
+  expires-in: 86400 # 1day
+  mobile-expires-in: 31536000
+  table-expires-in: 31536000
+  secret-key: AADfaskllew32dsfasdTG764Gdslkj298GsWg86G
