@@ -14,7 +14,18 @@ spec:
     spec:
       containers:
         - name: k8s-backend-user
-          image: surnavy/k8s-backend-user:0.0.1
+          image: surnavy/k8s-backend-user:0.0.5
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - mountPath: /etc/config
+              name: backend-user-config-volume
+
+      volumes:
+        - name: backend-user-config-volume
+          configMap:
+            name: backend-user-config
+            items:
+              - key: application-dev.yml
+                path: application-cdv.yml
