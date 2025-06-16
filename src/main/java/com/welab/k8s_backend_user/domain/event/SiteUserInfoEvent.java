@@ -6,8 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+    @Getter
+    @Setter
 public class SiteUserInfoEvent {
     public static final String Topic = "userinfo";
     private String action;
