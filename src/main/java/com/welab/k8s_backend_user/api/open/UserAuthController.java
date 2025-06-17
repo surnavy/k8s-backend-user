@@ -39,6 +39,6 @@ public class UserAuthController {
 
     @GetMapping(value = "/test")
     public ApiResponseDto<String> test() {
-        return ApiResponseDto.createOK("버전 1입니다.");
+        return ApiResponseDto.createOK("버전 2입니다.");
     }
 }
