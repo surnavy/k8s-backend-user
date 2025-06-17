@@ -46,6 +46,7 @@ public class ApiCommonAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class})
     public ApiResponseDto<String> handleException(Exception e) {
+        log.error("Unhandled exception caught", e);
         return ApiResponseDto.createError(
                 "ServerError",
                 "서버 에러입니다."
